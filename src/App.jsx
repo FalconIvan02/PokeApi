@@ -5,9 +5,10 @@ import Cards from "../src/components/Cards";
 import Chest from "./assets/images/cofre.png";
 import Castle from "./assets/images/castillo.png";
 import Fire from "./assets/images/fuego.png";
+import { primerMayuscula } from "../src/assets/helper/helper.js";
 
 function App() {
-    const { data, isLoading, isError, dataPoke } = useContext(DataContext);
+    const { data, isLoading, isError, dataPoke, LoadMore } = useContext(DataContext);
     const [dataApi, setDataApi] = useState([]);
     const [dataPokemon, setDataPokemon] = useState([]);
 
@@ -37,7 +38,7 @@ function App() {
                             <div className="section-top">
                                 <img id="img" src={pokemon.sprites.other.dream_world.front_default} alt={pokemon.id} />
                                 <div class="pokemon-id">
-                                    <h3>{pokemon.name}</h3>
+                                    <h3>{primerMayuscula(pokemon.name)}</h3>
                                     <span>#{pokemon.id}</span>
                                 </div>
 
@@ -47,6 +48,7 @@ function App() {
                                 <div class="stat">
                                     <h3>Poder</h3>
                                     <img id="fuego-img" src={Fire} alt="fuego" />
+                                    <h3>{pokemon.stats[0].base_stat}</h3>
                                 </div>
                                 <div class="stat">
                                     <h3>Resistencia</h3>
@@ -59,7 +61,7 @@ function App() {
                             </section>
                         </article>
                     ))}
-                {/*           {dataPokemon && dataPokemon.map((char) => <img src={char.front_default}></img>)} */}
+                <button onClick={LoadMore}>CARGAR MAS</button>
             </main>
         </>
     );
